@@ -3,428 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoSnap – Small Steps. Big Change.</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>EcoSnap 3D – Save Earth in Real 3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;900&family=Orbitron:wght@900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --green: #4CAF50;
-            --blue: #76D7EA;
-            --white: #FFFFFF;
-            --lightgray: #F5F5F5;
-            --dark: #1a1a1a;
-            --dark-green: #2e7d32;
-        }
-        .dark-mode {
-            --green: #66BB6A;
-            --blue: #4FC3F7;
-            --white: #121212;
-            --lightgray: #1e1e1e;
-        }
         * { margin:0; padding:0; box-sizing:border-box; }
         body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--white);
-            color: #333;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        html { scroll-behavior: smooth; }
-        
-        /* Scroll Progress Bar */
-        #progressBar {
-            position: fixed;
-            top: 0; left: 0;
-            width: 0%;
-            height: 5px;
-            background: var(--green);
-            z-index: 9999;
-            transition: width 0.2s;
-        }
-        /* Header */
-        header {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2071') center/cover no-repeat;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
-        .logo { position: absolute; top: 20px; left: 30px; font-size: 2rem; font-weight: 700; }
-        nav {
-            position: absolute;
-            top: 25px; right: 30px;
-        }
-        nav a {
-            color: white; margin: 0 15px; text-decoration: none; font-weight: 600;
-            transition: 0.3s;
-        }
-        nav a:hover { color: var(--green); }
-        .hero h1 { font-size: 4.5rem; margin-bottom: 20px; }
-        .hero p { font-size: 1.5rem; margin-bottom: 40px; }
-        .btn {
-            background: var(--green);
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transition: 0.3s;
-        }
-        .btn:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-
-        /* Dark Mode Toggle */
-        .dark-toggle {
-            position: fixed;
-            bottom: 30px; right: 30px;
-            background: var(--green);
-            color: white;
-            width: 60px; height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            cursor: pointer;
-            z-index: 999;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        section { padding: 100px 10%; }
-        h2 { font-size: 3rem; text-align: center; margin-bottom: 60px; color: var(--green); }
-        
-        /* Why It Matters */
-        .icons {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            flex-wrap: wrap;
-        }
-        .icon-box {
-            text-align: center;
-            max-width: 250px;
-        }
-        .icon-box i { font-size: 4rem; color: var(--green); margin-bottom: 20px; }
-        .icon-box h3 { font-size: 1.5rem; margin-bottom: 10px; }
-
-        /* Tips Gallery */
-        .tips-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        .tip-card {
-            background: white;
-            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: 0.4s;
-            cursor: pointer;
-        }
-        .tip-card:hover { transform: translateY(-15px); }
-        .tip-card .front, .tip-card .back {
-            padding: 30px;
-            height: 100%;
-            backface-visibility: hidden;
-        }
-        .tip-card .front {
-            background: var(--lightgray);
-            text-align: center;
-        }
-        .tip-card .front i { font-size: 3.5rem; color: var(--green); margin-bottom: 20px; }
-        .tip-card .back {
-            background: var(--green);
+            background: #000;
+            font-family: 'Poppins', sans-serif;
             color: white;
-            transform: rotateY(180deg);
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            height: 100vh;
+            perspective: 2000px;
+            cursor: none;
         }
-        .tip-card.flipped .front { transform: rotateY(180deg); }
-        .tip-card.flipped .back { transform: rotateY(0); }
-
-        /* Facts */
-        .facts { text-align: center; font-size: 1.8rem; line-height: 2.5; }
-        .facts span { font-weight: 700; color: var(--green); }
-
-        /* CTA */
-        .cta {
-            background: linear-gradient(135deg, var(--green), var(--blue));
-            color: white;
-            text-align: center;
-            border-radius: 30px;
-            padding: 80px 10% !important;
-            margin: 0 10%;
-        }
-        .cta form {
-            max-width: 600px;
-            margin: 40px auto 0;
-            display: grid;
-            gap: 20px;
-            grid-template-columns: 1fr 1fr;
-        }
-        .cta input, .cta textarea {
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            font-family: inherit;
-        }
-        .cta textarea { grid-column: span 2; }
-        .cta button { grid-column: span 2; }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 60px 10%;
-        }
-        .socials a { color: white; font-size: 2rem; margin: 0 15px; transition: 0.3s; }
-        .socials a:hover { color: var(--green); }
-        .back-top {
+        #cursor {
             position: fixed;
-            bottom: 100px; right: 30px;
-            background: var(--green);
-            color: white;
-            width: 50px; height: 50px;
+            width: 40px; height: 40px;
+            background: radial-gradient(circle, #00ff88, #00ff8800);
+            border: 2px solid #00ff88;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0;
-            transition: 0.3s;
+            pointer-events: none;
+            z-index: 999999;
+            box-shadow: 0 0 60px #00ff88;
+            transition: all 0.1s;
+            transform: translate(-50%, -50%);
         }
-        .back-top.show { opacity: 1; }
-
-        /* Daily Tip */
-        #dailyTip {
+        #progress {
+            position: fixed;
+            top: 0; left: 0; width: 0%; height: 8px;
+            background: linear-gradient(90deg, #00ff88, #00ffff);
+            z-index: 99999;
+            box-shadow: 0 0 30px #00ff88;
+        }
+        .scene { 
+            position: fixed;
+            width: 100vw; height: 100vh;
+            transform-style: preserve-3d;
+        }
+        .layer {
+            position: absolute;
+            width: 100%; height: 100%;
+            background-size: cover;
+            transform-style: preserve-3d;
+        }
+        #globe-container {
             position: fixed;
             top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            text-align: center;
-            max-width: 90%;
-            z-index: 1000;
-            display: none;
+            width: 600px; height: 600px;
+            transform: translate(-50%, -50%) translateZ(200px);
+            z-index: 10;
         }
-        #dailyTip.show { display: block; }
-        #closeTip { margin-top: 20px; cursor: pointer; color: var(--green); font-weight: 600; }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .cta form { grid-template-columns: 1fr; }
-            .cta textarea { grid-column: span 1; }
+        canvas { display: block; }
+        .ui {
+            position: fixed;
+            z-index: 100;
+            padding: 20px;
+            pointer-events: none;
         }
+        .top { top: 20px; left: 20px; }
+        .bottom { bottom: 20px; right: 20px; text-align: right; }
+        h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 5vw;
+            background: linear-gradient(45deg, #00ff88, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 50px rgba(0,255,136,0.8);
+            animation: glow 3s infinite alternate;
+        }
+        @keyframes glow { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(360deg); } }
     </style>
+    <!-- THREE.js + WebGL Globe -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/examples/js/loaders/GLTFLoader.js"></script>
 </head>
 <body>
-    <div id="progressBar"></div>
+    <div id="cursor"></div>
+    <div id="progress"></div>
     
-    <!-- Dark Mode Toggle -->
-    <div class="dark-toggle" onclick="toggleDark()">
-        <i class="fas fa-moon" id="moon"></i>
+    <div class="scene">
+        <div class="layer" style="background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2784') center/cover; transform: translateZ(-500px) scale(2); filter: brightness(0.3);"></div>
+        <div class="layer" style="background: radial-gradient(circle at center, #0000, #000); transform: translateZ(-200px);"></div>
+        
+        <div id="globe-container"></div>
+        
+        <div class="ui top">
+            <h1>ECOSNAP 3D</h1>
+            <p style="font-size:2vw; margin-top:20px; opacity:0.9;">
+                DRAG THE GLOBE • CLICK COUNTRIES • MOVE MOUSE FOR 3D SOUND
+            </p>
+        </div>
+        
+        <div class="ui bottom">
+            <p style="font-size:1.5vw;">Pledges today: <span id="pledgeCount">0</span></p>
+            <button onclick="makePledge()" style="padding:15px 40px; background:#00ff88; border:none; border-radius:50px; font-weight:900; font-size:1.5vw; cursor:pointer; pointer-events:auto;">
+                I PLEDGE TO SAVE EARTH
+            </button>
+        </div>
     </div>
 
-    <!-- Back to Top -->
-    <div class="back-top" onclick="scrollToTop()">
-        <i class="fas fa-arrow-up"></i>
-    </div>
-
-    <header>
-        <div class="logo">EcoSnap</div>
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#tips">Tips</a>
-            <a href="#join">Join</a>
-        </nav>
-        <div class="hero">
-            <h1>Small Steps. Big Change.</h1>
-            <p>Learn quick ways to protect our planet.</p>
-            <button class="btn" onclick="document.getElementById('why').scrollIntoView()">Start Exploring ↓</button>
-        </div>
-    </header>
-
-    <section id="why">
-        <h2>Why It Matters</h2>
-        <p style="text-align:center; font-size:1.3rem; max-width:800px; margin:0 auto 60px;">
-            Every small act counts. From saving a drop of water to reusing a bag, our daily choices shape the Earth’s future.
-        </p>
-        <div class="icons">
-            <div class="icon-box">
-                <i class="fas fa-leaf"></i>
-                <h3>Save Nature</h3>
-                <p>Reduce waste and protect forests</p>
-            </div>
-            <div class="icon-box">
-                <i class="fas fa-tint"></i>
-                <h3>Conserve Water</h3>
-                <p>Small habits save thousands of liters</p>
-            </div>
-            <div class="icon-box">
-                <i class="fas fa-solar-panel"></i>
-                <h3>Use Clean Energy</h3>
-                <p>Choose renewables for a greener tomorrow</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="tips">
-        <h2>Eco Tips You Can Try</h2>
-        <div class="tips-grid">
-            <div class="tip-card" onclick="flip(this)">
-                <div class="front"><i class="fas fa-lightbulb"></i><p>Turn off lights when not in use</p></div>
-                <div class="back">One hour of unused lights = 1 tree's daily oxygen!</div>
-            </div>
-            <div class="tip-card" onclick="flip(this)">
-                <div class="front"><i class="fas fa-bottle-water"></i><p>Carry your own water bottle</p></div>
-                <div class="back">Saves 156 plastic bottles per year!</div>
-            </div>
-            <div class="tip-card" onclick="flip(this)">
-                <div class="front"><i class="fas fa-seedling"></i><p>Plant one tree monthly</p></div>
-                <div class="back">A single tree absorbs 22 kg CO₂ yearly</div>
-            </div>
-            <div class="tip-card" onclick="flip(this)">
-                <div class="front"><i class="fas fa-shopping-bag"></i><p>Use reusable shopping bags</p></div>
-                <div class="back">Cuts 500 plastic bags per person yearly</div>
-            </div>
-            <div class="tip-card" onclick="flip(this)">
-                <div class="front"><i class="fas fa-plug"></i><p>Unplug devices when full</p></div>
-                <div class="back">Saves 10% of your electricity bill</div>
-            </div>
-            <div class="tip-card" onclick="flip(this)">
-                <div class="front"><i class="fas fa-recycle"></i><p>Recycle properly</p></div>
-                <div class="back">Recycling one aluminum can saves enough energy to run a TV for 3 hours</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="facts">
-        <h2>Did You Know?</h2>
-        <div class="facts">
-            <p>🌍 Plastic takes <span class="count" data-target="500">0</span> years to decompose.</p>
-            <p>💧 A dripping tap wastes <span class="count" data-target="20">0</span> liters daily.</p>
-            <p>💡 Switching to LED saves <span class="count" data-target="75">0</span>% energy vs bulbs.</p>
-        </div>
-    </section>
-
-    <section id="join" class="cta">
-        <h2>Join the Movement</h2>
-        <p style="font-size:1.5rem; margin-bottom:30px;">Pledge to make one eco change today!</p>
-        <form onsubmit="submitPledge(event)">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="My eco-goal: I will..." required></textarea>
-            <button type="submit" class="btn">Count me in!</button>
-        </form>
-    </section>
-
-    <footer>
-        <p style="font-size:1.5rem; margin-bottom:20px;">EcoSnap – Change begins with you.</p>
-        <div class="socials">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-        </div>
-        <p style="margin-top:30px;">Made with care for the planet 🌍</p>
-    </footer>
-
-    <!-- Daily Tip Modal -->
-    <div id="dailyTip">
-        <h3>🌱 Today's Eco Tip</h3>
-        <p id="tipText" style="font-size:1.3rem; margin:20px 0;"></p>
-        <div id="closeTip" onclick="document.getElementById('dailyTip').classList.remove('show')">[ Close ]</div>
-    </div>
+    <!-- 3D SPATIAL AUDIO THAT FOLLOWS MOUSE -->
+    <audio id="ambient" loop autoplay>
+        <source src="https://cdn.pixabay.com/download/audio/2023/08/15/audio_7e6d7e9f2e.mp3?filename=ambient-space-124462.mp3" type="audio/mp3">
+    </audio>
 
     <script>
-        // Scroll Progress
-        window.onscroll = () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById("progressBar").style.width = scrolled + "%";
-            
-            // Back to top button
-            document.querySelector('.back-top').classList.toggle('show', winScroll > 500);
-        };
+        // ===== 3D GLOBE WITH THREE.JS =====
+        let camera, scene, renderer, globe, controls;
+        let mouseX = 0, mouseY = 0;
+        const pledges = [];
 
-        // Back to top
-        function scrollToTop() { window.scrollTo({top: 0, behavior: 'smooth'}); }
+        function initGlobe() {
+            const container = document.getElementById('globe-container');
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x000000);
 
-        // Card flip
-        function flip(el) { el.classList.toggle('flipped'); }
+            camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+            camera.position.z = 500;
 
-        // Dark mode
-        function toggleDark() {
-            document.body.classList.toggle('dark-mode');
-            const icon = document.getElementById('moon');
-            icon.classList.toggle('fa-moon');
-            icon.classList.toggle('fa-sun');
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(600, 600);
+            container.appendChild(renderer.domElement);
+
+            // EARTH
+            const geometry = new THREE.SphereGeometry(200, 64, 64);
+            const texture = new THREE.TextureLoader().load('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg');
+            const material = new THREE.MeshPhongMaterial({ map: texture, bumpScale: 0.05 });
+            globe = new THREE.Mesh(geometry, material);
+            scene.add(globe);
+
+            // ATMOSPHERE
+            const atmosphere = new THREE.Mesh(
+                new THREE.SphereGeometry(205, 64, 64),
+                new THREE.MeshBasicMaterial({
+                    color: 0x00ffff,
+                    transparent: true,
+                    opacity: 0.1
+                })
+            );
+            scene.add(atmosphere);
+
+            // LIGHTS
+            const light = new THREE.DirectionalLight(0xffffff, 1.5);
+            light.position.set(500, 500, 500);
+            scene.add(light);
+            scene.add(new THREE.AmbientLight(0x404040));
+
+            // CONTROLS
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.rotateSpeed = 0.5;
+
+            // CLICK COUNTRY
+            renderer.domElement.addEventListener('click', onGlobeClick);
+
+            animate();
         }
 
-        // Counter animation
-        const counters = document.querySelectorAll('.count');
-        const speed = 200;
-        const animateCounters = () => {
-            counters.forEach(counter => {
-                const updateCount = () => {
-                    const target = +counter.getAttribute('data-target');
-                    const count = +counter.innerText;
-                    const inc = target / speed;
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count + inc);
-                        setTimeout(updateCount, 30);
-                    } else {
-                        counter.innerText = target;
-                    }
-                };
-                updateCount();
-            });
-        };
+        function onGlobeClick(event) {
+            const rect = renderer.domElement.getBoundingClientRect();
+            mouseX = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            mouseY = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
-        // Trigger counter when section is visible
-        const factsSection = document.getElementById('facts');
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                animateCounters();
-                observer.unobserve(factsSection);
+            const vector = new THREE.Vector3(mouseX, mouseY, 0.5);
+            vector.unproject(camera);
+            const ray = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
+            const intersects = ray.intersectObject(globe);
+
+            if (intersects.length > 0) {
+                const point = intersects[0].point;
+                createFirework(point);
+                showCountryInfo(point);
             }
-        }, { threshold: 0.5 });
-        observer.observe(factsSection);
-
-        // Form submission
-        function submitPledge(e) {
-            e.preventDefault();
-            alert("Thank you! 🌍 Your pledge has been recorded. You're now part of the change!");
-            e.target.reset();
         }
 
-        // Daily Tip Generator
-        const tips = [
-            "Take 2-minute showers to save 30 liters of water!",
-            "Say NO to plastic straws – turtles thank you!",
-            "Walk or bike for trips under 2 km",
-            "Switch to a bamboo toothbrush today",
-            "Unplug your microwave when not in use"
-        ];
-        function showDailyTip() {
-            const randomTip = tips[Math.floor(Math.random() * tips.length)];
-            document.getElementById('tipText').innerText = randomTip;
-            document.getElementById('dailyTip').classList.add('show');
+        function createFirework(position) {
+            for(let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'fixed';
+                particle.style.width = '8px';
+                particle.style.height = '8px';
+                particle.style.borderRadius = '50%';
+                particle.style.background = ['#00ff88','#00ffff','#ff00ff','#ffff00'][i%4];
+                particle.style.left = (window.innerWidth/2 + position.x * 2) + 'px';
+                particle.style.top = (window.innerHeight/2 - position.y * 2) + 'px';
+                particle.style.pointerEvents = 'none';
+                particle.style.boxShadow = '0 0 20px currentColor';
+                document.body.appendChild(particle);
+
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 5 + Math.random() * 10;
+                const anim = particle.animate([
+                    { transform: 'translate(0,0) scale(1)', opacity: 1 },
+                    { transform: `translate(${Math.cos(angle)*velocity*100}px, ${Math.sin(angle)*velocity*100}px) scale(0)`, opacity: 0 }
+                ], {
+                    duration: 1500,
+                    easing: 'cubic-bezier(0.1, 0.7, 0.3, 1)'
+                });
+                anim.onfinish = () => particle.remove();
+            }
         }
-        // Show tip 3 seconds after load
-        setTimeout(showDailyTip, 3000);
+
+        function showCountryInfo(point) {
+            const countries = ['Brazil','Norway','India','Australia','USA','China'];
+            const facts = [
+                'Amazon lost 17% since 1970',
+                '98% renewable energy!',
+                'Planted 50B trees',
+                'Great Barrier Reef dying',
+                'California wildfires up 400%',
+                'Building 2 coal plants/week'
+            ];
+            const random = Math.floor(Math.random() * countries.length);
+            alert(`${countries[random]}\n${facts[random]}`);
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            globe.rotation.y += 0.003;
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        // ===== 3D SPATIAL SOUND FOLLOWING MOUSE =====
+        const audio = document.getElementById('ambient');
+        audio.volume = 0.6;
+        
+        document.addEventListener('mousemove', e => {
+            // Cursor
+            document.getElementById('cursor').style.left = e.clientX + 'px';
+            document.getElementById('cursor').style.top = e.clientY + 'px';
+
+            // 3D Audio Panning (Web Audio API)
+            if (window.AudioContext) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!window.audioCtx) {
+                    window.audioCtx = new AudioContext();
+                    const track = window.audioCtx.createMediaElementSource(audio);
+                    const panner = new PannerNode(window.audioCtx, {
+                        panningModel: 'HRTF',
+                        distanceModel: 'inverse',
+                        refDistance: 1,
+                        maxDistance: 10000,
+                        rolloffFactor: 10
+                    });
+                    track.connect(panner).connect(window.audioCtx.destination);
+                    window.panner = panner;
+                }
+                
+                const x = (e.clientX / window.innerWidth) * 2 - 1;
+                const y = (e.clientY / window.innerHeight) * 2 - 1;
+                window.panner.positionX.setValueAtTime(x * 50, window.audioCtx.currentTime);
+                window.panner.positionY.setValueAtTime(-y * 50, window.audioCtx.currentTime);
+                window.panner.positionZ.setValueAtTime(0, window.audioCtx.currentTime);
+            }
+        });
+
+        // ===== PLEDGE SYSTEM WITH 3D CARDS =====
+        function makePledge() {
+            const name = prompt("Your name, Earth hero?");
+            if (!name) return;
+            
+            const card = document.createElement('div');
+            card.style.position = 'fixed';
+            card.style.padding = '20px 40px';
+            card.style.background = 'linear-gradient(135deg, #00ff88, #00ffff)';
+            card.style.borderRadius = '30px';
+            card.style.fontWeight = '900';
+            card.style.fontSize = '1.5vw';
+            card.style.color = 'black';
+            card.style.boxShadow = '0 0 50px #00ff88';
+            card.style.transform = 'translateZ(500px)';
+            card.style.left = Math.random() * 70 + 15 + 'vw';
+            card.style.top = '-100px';
+            card.innerHTML = name + ' PLEDGED!';
+            document.body.appendChild(card);
+
+            card.animate([
+                { top: '-100px', transform: 'translateZ(500px) rotateX(90deg)' },
+                { top: '50vh', transform: 'translateZ(0) rotateX(0deg)' }
+            ], { duration: 2000, easing: 'cubic-bezier(0.2, 0.8, 0.4, 1)' });
+
+            setTimeout(() => {
+                card.style.transition = 'all 2s';
+                card.style.transform = 'translateY(100vh) rotateZ(720deg)';
+                card.style.opacity = '0';
+                setTimeout(() => card.remove(), 2000);
+            }, 3000);
+
+            pledges.push(name);
+            document.getElementById('pledgeCount').innerText = pledges.length;
+        }
+
+        // Progress
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const percent = (window.scrollY / (h.scrollHeight - h.clientHeight)) * 100;
+            document.getElementById('progress').style.width = percent + '%';
+        });
+
+        // Mobile gyro tilt
+        window.addEventListener('deviceorientation', e => {
+            if (e.beta !== null) {
+                document.querySelector('.scene').style.transform = 
+                    `rotateX(${e.beta}deg) rotateY(${e.gamma}deg)`;
+            }
+        });
+
+        // INIT
+        initGlobe();
+        audio.play().catch(() => console.log("Audio autoplay blocked"));
     </script>
 </body>
 </html>
